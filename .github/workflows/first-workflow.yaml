@@ -43,6 +43,8 @@ jobs:
  Build:
    runs-on: ubuntu-latest
    steps:
+     - name: Checkout code
+       uses: actions/checkout@v2   
      - name: build
        run: |
          echo "------ Installing Terraform ------"
@@ -71,9 +73,7 @@ jobs:
          echo "export PATH" >> .profile
          source .profile
          mvn -version
-
          echo "------ Build ------"
-         cd ../
          mvn compile 
         
  
