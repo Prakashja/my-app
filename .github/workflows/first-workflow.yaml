@@ -41,14 +41,8 @@ jobs:
  #         mvn -version
          
  Build:
-   runs-on: ubuntu-latest
-   steps:
-     - name: Checkout code
-       uses: actions/checkout@v2   
-     - name: build
-       run: |
-         uses: Prakashja/workflow-templates/.github/workflows/reusable-workflow.yaml
-         mvn compile 
+    uses: Prakashja/workflow-templates/.github/workflows/reusable-workflow.yaml@main
+         
         
  
 
