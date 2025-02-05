@@ -1,11 +1,10 @@
 name: my-first-github-workflow
-run-name: {{ github.sha }}
+run-name: ${{ github.actor }} is testing out GitHub Actions
 on: 
  push:
   branches: ["main"]
  pull_request:
-  brances:
-    - main
+  types: [opened,reopened]
  workflow_dispatch:
 
 jobs:
