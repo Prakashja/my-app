@@ -39,6 +39,42 @@ jobs:
          echo "export PATH" >> .profile
          source .profile
          mvn -version
+         
+ Build:
+   runs-on: ubuntu-latest 
+   steps:
+     - name: build
+       run: |
+         echo "------ Installing Terraform ------"
+         wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
+         wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
+         gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
+         echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list        
+         sudo apt update 
+         sudo apt-get install terraform
+         terraform -help
+         echo "------ Installing Java ------"
+         wget https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_linux-x64_bin.tar.gz
+         tar -xvf openjdk-13.0.1_linux-x64_bin.tar.gz
+         mv jdk-13.0.1 /opt/
+         echo "JAVA_HOME='/opt/jdk-13.0.1'" >> .profile
+         echo "PATH="$JAVA_HOME/bin:$PATH"" >> .profile
+         echo  "export PATH" >> .profile
+         source .profile
+         java -version
+         echo "------ Installing Maven ------"
+         wget https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz
+         tar -xvf apache-maven-3.9.9-bin.tar.gz
+         mv apache-maven-3.9.9 /opt/
+         echo "M2_HOME='/opt/apache-maven-3.9.9'" >> .profile
+         echo "PATH="$M2_HOME/bin:$PATH"" >> .profile
+         echo "export PATH" >> .profile
+         source .profile
+         mvn -version
 
+         echo "------ Build ------"
+         mvn compile
+        
+ 
 
 
