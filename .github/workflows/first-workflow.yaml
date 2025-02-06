@@ -42,8 +42,7 @@ jobs:
          
  Deployment-Stage:
     uses: Prakashja/workflow-templates/.github/workflows/reusable-workflow.yaml@main
-         
-        
- 
+    with:
+      docker_url: https//docker.io
 
 
