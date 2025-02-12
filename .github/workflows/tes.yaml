@@ -1,6 +1,6 @@
 name: my-first-workflow
 
-run-name: ${{ github.actor }} is testing out GitHub Actions
+run-name: ${{ github.event_name }} is testing out GitHub Actions
 
 on:
   workflow_dispatch:
