@@ -1,0 +1,28 @@
+name: my-first-workflow
+
+run-name: ${{ github.actor }} is testing out GitHub Actions
+
+on:
+  workflow_dispatch:
+
+jobs:
+  install-pre-requisites:
+    runs-on: ubuntu-latest
+    steps:      
+    - name: python
+      run: |
+        echo `cat /etc/os-release`
+        python --version
+        sudo apt-get install python3-pip -y
+        sudo pip install pylint
+        sudo pip install -U pytest
+
+  run_lint:
+    needs: install-pre-requisites
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: lint
+      run: |
+        pylint . --out-format test
