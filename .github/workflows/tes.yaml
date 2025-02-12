@@ -51,7 +51,8 @@ jobs:
   run_docker_build:
     needs: run_unit_test
     runs-on: ubuntu-latest
-    environment: {{ GITHUB_REF }}
+    if: $GITHUB_REF == master
+    environment: production
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
