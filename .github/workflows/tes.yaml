@@ -50,12 +50,12 @@ jobs:
           First_Name: John
   run_docker_build:
     needs: run_unit_test
-    runs-on: ubuntu-latest
-    if: $GITHUB_REF == master
+    runs-on: ubuntu-latest    
     environment: production
-    steps:
+    steps:    
       - name: Checkout code
         uses: actions/checkout@v2
       - name: docker_run
         run: |
           echo "Docker Build ... {{ var.PROD_DOCKER_URI }}"
+        if: gtihub.ref == 'refs/heads/master'  
