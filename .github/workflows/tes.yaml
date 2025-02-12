@@ -57,5 +57,5 @@ jobs:
         uses: actions/checkout@v2
       - name: docker_run
         run: |
-          echo "Docker Build ... {{ var.PROD_DOCKER_URI }}"
-        if: gtihub.ref == 'refs/heads/master'  
+          echo "Docker Build ... {{ var.DOCKER_URI }}"
+        if: ${{ github.ref_name }} == 'refs/heads/master'  
