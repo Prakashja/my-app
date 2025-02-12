@@ -4,11 +4,30 @@ run-name: ${{ github.event_name }} is testing out GitHub Actions
 
 on:
   workflow_dispatch:
-
+    inputs:
+      name:
+        type: choice
+        description: Who to greet
+        options: 
+        - monalisa
+        - cschleiden
+      message:
+        required: true
+      use-emoji:
+        type: boolean
+        description: Include 🎉🤣 emojis
+      environment:
+        type: environment
+        
 env:
   DAY_OF_WEEK: Monday
 
 jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send greeting
+      run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", "🥳"]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
   run_lint:
     runs-on: ubuntu-latest
     steps:
