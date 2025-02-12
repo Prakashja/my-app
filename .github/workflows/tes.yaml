@@ -51,11 +51,11 @@ jobs:
   run_docker_build:
     needs: run_unit_test
     runs-on: ubuntu-latest    
-    environment: production
+    environment: ${{ github.ref == 'refs/heads/master' && 'prod' || github.ref == 'refs/heads/staging' && 'staging' || 'dev' }}
     steps:    
       - name: Checkout code
         uses: actions/checkout@v2
       - name: docker_run
         run: |
-          echo "Docker Build ... {{ var.DOCKER_URI }}"
-        if: ${{ github.ref_name }} == 'refs/heads/master'  
+          echo "DOCKER_URI=${{ vars.DOCKER_URI }}"
+          echo "API_KEY=${{ secrets.API_KEY }}"
