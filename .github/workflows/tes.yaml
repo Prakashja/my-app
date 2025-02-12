@@ -59,3 +59,24 @@ jobs:
         run: |
           echo "DOCKER_URI=${{ vars.DOCKER_URI }}"
           echo "API_KEY=${{ secrets.API_KEY }}"
+  run_docker_push:
+    needs: run_unit_test
+    runs-on: ubuntu-latest    
+    environment: ${{ github.ref == 'refs/heads/master' && 'prod' || github.ref == 'refs/heads/staging' && 'staging' || 'dev' }}
+    steps:    
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: docker_run
+        run: |
+          echo "Pushing docker image to DOCKER_URI=${{ vars.DOCKER_URI }}"
+          echo "API_KEY=${{ secrets.API_KEY }}" 
+  run_helm_update:
+    needs: run_unit_test
+    runs-on: ubuntu-latest    
+    environment: ${{ github.ref == 'refs/heads/master' && 'prod' || github.ref == 'refs/heads/staging' && 'staging' || 'dev' }}
+    steps:    
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: docker_run
+        run: |
+          echo "updating helm values.yaml with lates image"          
