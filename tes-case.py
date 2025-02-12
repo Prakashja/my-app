@@ -3,7 +3,7 @@ Module test_case
 """
 
 import unittest
-from tech_week_session import add_numbers
+from aosnifds import add_numbers
 
 class TestTechWeekSession(unittest.TestCase):
     """Unit tests for Tech Week Session"""
