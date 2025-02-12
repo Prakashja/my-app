@@ -23,4 +23,4 @@ jobs:
         pylint .
     - name: unit-test
       run: |
-        pythest .
+        pytest .
