@@ -21,3 +21,6 @@ jobs:
     - name: lint
       run: |
         pylint .
+    - name: unit-test
+      run: |
+        pythest .
