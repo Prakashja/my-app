@@ -1,4 +1,4 @@
-name: my-second-github-workflow
+name: my-first-github-workflow
 run-name: ${{ github.actor }} is testing out GitHub Actions
 on: 
  workflow_dispatch:
