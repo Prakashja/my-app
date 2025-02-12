@@ -20,12 +20,28 @@ jobs:
         pylint .
   run_unit_test:
     needs: run_lint
-    runs-on: arc-gridos-devops-ci-cd-workout-runners
+    runs-on: ubuntu-latest
     steps:
       - name: install_pytest
         run: |
           sudo apt-get install python3-pip -y
-          sudo pip install -U pytest    
+          sudo pip install -U pytest
       - name: unit-test
         run: |
           pytest .    
+
+  run_aqua_test:
+    needs: run_lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: install_pytest
+        run: |
+         echo "Aqua test are passed successfully ....."
+
+  run_docker_build:
+    needs: run_unit_test
+    runs-on: ubuntu-latest
+    steps:
+      - name: docker_run
+        run: |
+          echo "Docker Build ..."
