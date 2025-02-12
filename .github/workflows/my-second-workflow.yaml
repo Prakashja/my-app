@@ -1,0 +1,30 @@
+name: my-second-github-workflow
+run-name: ${{ github.event_name }} is testing out GitHub Actions
+on: 
+ push:
+  branches: ["master"]
+ pull_request:
+  types: [opened,reopened]
+ workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: Who to greet
+        options: 
+        - monalisa
+        - cschleiden
+      message:
+        required: true
+      use-emoji:
+        type: boolean
+        description: Include 🎉🤣 emojis
+      environment:
+        type: environment 
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send greeting
+      run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", "🥳"]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
+  deployment:
+      uses: Prakashja/workflow-templates/.github/workflows/python-worflow.yaml@main
