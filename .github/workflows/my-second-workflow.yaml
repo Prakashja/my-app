@@ -26,5 +26,6 @@ jobs:
     steps:
     - name: Send greeting
       run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", "🥳"]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
-  deployment:
+  ci-stages:
+      needs: greet
       uses: Prakashja/workflow-templates/.github/workflows/python-worflow.yaml@main
