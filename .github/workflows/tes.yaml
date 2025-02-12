@@ -6,21 +6,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  install-pre-requisites:
+  run_lint:
     runs-on: ubuntu-latest
     steps:
-    - name: python
+    - name: install_pylint
       run: |
-        echo `cat /etc/os-release`
-        python --version
         sudo apt-get install python3-pip -y
         sudo pip install pylint
-        sudo pip install -U pytest
     - name: Checkout code
       uses: actions/checkout@v2
     - name: lint
       run: |
         pylint .
-    - name: unit-test
-      run: |
-        pytest .
+  run_unit_test:
+    needs: run_lint
+    runs-on: arc-gridos-devops-ci-cd-workout-runners
+    steps:
+      - name: install_pytest
+        run: |
+          sudo apt-get install python3-pip -y
+          sudo pip install -U pytest    
+      - name: unit-test
+        run: |
+          pytest .    
