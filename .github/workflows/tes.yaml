@@ -60,7 +60,7 @@ jobs:
           echo "DOCKER_URI=${{ vars.DOCKER_URI }}"
           echo "API_KEY=${{ secrets.API_KEY }}"
   run_docker_push:
-    needs: run_unit_test
+    needs: run_docker_build
     runs-on: ubuntu-latest    
     environment: ${{ github.ref == 'refs/heads/master' && 'prod' || github.ref == 'refs/heads/staging' && 'staging' || 'dev' }}
     steps:    
@@ -71,7 +71,7 @@ jobs:
           echo "Pushing docker image to DOCKER_URI=${{ vars.DOCKER_URI }}"
           echo "API_KEY=${{ secrets.API_KEY }}" 
   run_helm_update:
-    needs: run_unit_test
+    needs: run_docker_push
     runs-on: ubuntu-latest    
     environment: ${{ github.ref == 'refs/heads/master' && 'prod' || github.ref == 'refs/heads/staging' && 'staging' || 'dev' }}
     steps:    
