@@ -1,0 +1,9 @@
+name: my-dev-github-workflow
+run-name: ${{ github.event_name }} Event Name
+on: 
+ push:
+  branches: ["dev"]
+ workflow_dispatch:
+jobs:
+  ci-stages:      
+      uses: Prakashja/workflow-templates/.github/workflows/python-worflow.yaml@main
