@@ -15,17 +15,6 @@ pipeline {
                 }
             }
         }
-
-        stage('Run Tests (optional)') {
-            steps {
-                script {
-                    // Optionally, you can run tests inside the container
-                    // Example:
-                    // sh "docker run --rm ${DOCKER_IMAGE_NAME}:${DOCKER_TAG} pytest"
-                }
-            }
-        }
-
         stage('Push Docker Image to Docker Hub (optional)') {
             when {
                 branch 'main' // Only push to Docker Hub when on the main branch
